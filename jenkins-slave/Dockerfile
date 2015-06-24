@@ -8,6 +8,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core
 
+RUN echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins
+
 USER jenkins
 
 #Install RVM
