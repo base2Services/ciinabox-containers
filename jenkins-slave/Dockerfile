@@ -9,17 +9,18 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq && apt-get install -qqy \
     apt-transport-https \
     ca-certificates \
-    curl \
-    build-essential \
     git \
     lxc \
-    iptables
+    iptables \
+    curl bison build-essential zlib1g-dev libssl-dev libreadline5-dev libxml2-dev git-core
+
+USER jenkins
 
 #Install RVM
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN \curl -sSL https://get.rvm.io | bash -s stable --ruby
 
-ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+USER root
 
 VOLUME /home/jenkins
 
