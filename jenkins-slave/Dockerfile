@@ -13,6 +13,15 @@ pip install awscli
 
 RUN echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins
 
+# Install Docker from Docker Inc. repositories.
+RUN curl -sSL https://get.docker.com/ubuntu/ | sh
+
+ADD wrapdocker /usr/local/bin/wrapdocker
+RUN chmod +x /usr/local/bin/wrapdocker
+VOLUME /var/lib/docker
+
+RUN usermod -a -G docker jenkins
+
 USER jenkins
 
 #Install RVM
@@ -26,4 +35,6 @@ VOLUME /home/jenkins
 # Standard SSH port
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd", "-D"]
+# place the jenkins slave startup script into the container
+ADD jenkins-slave-startup.sh /
+ENTRYPOINT ["/jenkins-slave-startup.sh"]
