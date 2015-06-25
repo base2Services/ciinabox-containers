@@ -6,7 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Adapted from: https://registry.hub.docker.com/u/jpetazzo/dind/dockerfile/
 # Let's start with some basic stuff.
-RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core
+RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core python-pip
+
+#install aws cli tools
+pip install awscli
 
 RUN echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins
 
