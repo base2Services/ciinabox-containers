@@ -6,15 +6,17 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Adapted from: https://registry.hub.docker.com/u/jpetazzo/dind/dockerfile/
 # Let's start with some basic stuff.
-RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core python-pip
+RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core git-flow python-pip unzip
 
-#install aws cli tools
-RUN pip install awscli
-
-RUN echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins
-
-# Install Docker from Docker Inc. repositories.
-RUN curl -sSL https://get.docker.com/ubuntu/ | sh
+RUN curl -L https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/12.04/x86_64/chefdk_0.6.2-1_amd64.deb > /tmp/chefdk_0.6.2-1_amd64.deb && \
+  dpkg -i /tmp/chefdk_0.6.2-1_amd64.deb && \
+  export LC_CTYPE=en_US.UTF-8 && \
+  locale-gen en_US.UTF-8 && \
+  curl -L https://dl.bintray.com/mitchellh/packer/packer_0.8.1_linux_amd64.zip > /tmp/packer.zip && \
+  unzip -o /tmp/packer.zip -d /opt/packer && \
+  pip install awscli && \
+  echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins && \
+  curl -sSL https://get.docker.com/ubuntu/ | sh
 
 ADD wrapdocker /usr/local/bin/wrapdocker
 RUN chmod +x /usr/local/bin/wrapdocker
