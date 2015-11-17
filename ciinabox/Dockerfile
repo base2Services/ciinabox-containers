@@ -5,6 +5,7 @@ MAINTAINER Aaron Walker <a.walker@base2services.com>
 ADD app/ /app
 
 RUN mkdir -p /data \
+    && chmod -R 777 /data
     && mkdir -p /usr/share/nginx \
     && ln -s /app/www /usr/share/nginx/html
 
