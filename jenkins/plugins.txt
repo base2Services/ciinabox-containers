@@ -33,6 +33,7 @@ confluence-publisher
 jenkins-cloudformation-plugin
 packer
 aws-java-sdk
+aws-credentials
 s3
 gravatar
 hipchat
@@ -58,6 +59,7 @@ jquery-detached
 ace-editor
 workflow-cps
 groovy-postbuild
+gradle
 slack
 windows-slaves
 aws-lambda
@@ -68,7 +70,7 @@ ssh-credentials
 ssh-slaves
 durable-task
 docker-plugin
- git-server
+git-server
 workflow-basic-steps
 workflow-scm-step
 workflow-cps-global-lib
