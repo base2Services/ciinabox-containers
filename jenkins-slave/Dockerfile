@@ -12,11 +12,11 @@ RUN curl -L https://opscode-omnibus-packages.s3.amazonaws.com/debian/6/x86_64/ch
   dpkg -i /tmp/chefdk_0.10.0-1_amd64.deb && \
   export LC_CTYPE=en_US.UTF-8 && \
   locale-gen en_US.UTF-8 && \
-  curl -L https://dl.bintray.com/mitchellh/packer/packer_0.8.1_linux_amd64.zip > /tmp/packer.zip && \
+  curl -L https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_amd64.zip > /tmp/packer.zip && \
   unzip -o /tmp/packer.zip -d /opt/packer && \
   pip install awscli && \
   echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins && \
-  curl -sSL https://get.docker.com/ubuntu/ | sh
+  curl -sSL https://get.docker.com/ | sh
 
 ADD wrapdocker /usr/local/bin/wrapdocker
 RUN chmod +x /usr/local/bin/wrapdocker
