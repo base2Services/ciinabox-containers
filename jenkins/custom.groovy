@@ -69,4 +69,4 @@ if(jenkinsCreds == null) {
 }
 
 Jenkins.instance.addNode(new DumbSlave("jenkins-docker-slave","Jenkins Docker Slave","/home/jenkins","8",Node.Mode.NORMAL,"docker",
-  new SSHLauncher("slave",22,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),new LinkedList()))
+  new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),new LinkedList()))
