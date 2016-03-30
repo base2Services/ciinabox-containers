@@ -3,6 +3,9 @@ FROM java:openjdk-8-jdk
 MAINTAINER Aaron Walker <a.walker@base2services.com>
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV DOCKER_VERSION "1.9.1"
+ENV CHEFDK_VERSION "$CHEFDK_VERSION"
+ENV PACKER_VERSION "0.9.0"
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
@@ -25,10 +28,10 @@ RUN apt-get update -qq && apt-get install -qqy \
   && adduser --quiet jenkins && echo "jenkins:jenkins" | chpasswd \
   && echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins \
   && usermod -a -G root jenkins \
-  && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-1.9.1 > /usr/bin/docker && chmod +x /usr/bin/docker \
-  && curl -kL https://packages.chef.io/stable/debian/6/chefdk_0.12.0-1_amd64.deb > /tmp/chefdk.deb \
+  && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION > /usr/bin/docker && chmod +x /usr/bin/docker \
+  && curl -kL https://packages.chef.io/stable/debian/6/chefdk_$CHEFDK_VERSION_amd64.deb > /tmp/chefdk.deb \
   && dpkg -i /tmp/chefdk.deb \
-  && curl -sSL https://releases.hashicorp.com/packer/0.9.0/packer_0.9.0_linux_amd64.zip > /tmp/packer.zip \
+  && curl -sSL https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_$PACKER_VERSION_linux_amd64.zip > /tmp/packer.zip \
   && unzip -o /tmp/packer.zip -d /opt/packer \
   && pip install awscli
 
