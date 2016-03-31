@@ -68,5 +68,11 @@ if(jenkinsCreds == null) {
  println("jenkins creds already exists")
 }
 
+def envVars = [
+  new EnvironmentVariablesNodeProperty.Entry('LANGUAGE','C.UTF-8'),
+  new EnvironmentVariablesNodeProperty.Entry('LC_ALL','C.UTF-8')
+]
+envProps = new EnvironmentVariablesNodeProperty(envVars)
+
 Jenkins.instance.addNode(new DumbSlave("jenkins-docker-slave","Jenkins Docker Slave","/home/jenkins","8",Node.Mode.NORMAL,"docker",
-  new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),new LinkedList()))
+  new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),[envProps]))
