@@ -4,7 +4,7 @@ MAINTAINER Aaron Walker <a.walker@base2services.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DOCKER_VERSION "1.9.1"
-ENV CHEFDK_VERSION "0.11.2-1"
+ENV CHEFDK_VERSION "0.12.0-1"
 ENV PACKER_VERSION "0.9.0"
 
 # Let's start with some basic stuff.
