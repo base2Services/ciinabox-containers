@@ -22,6 +22,7 @@ RUN apt-get update -qq && apt-get install -qqy \
   sudo \
   groff \
   less \
+  zip \
   && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
   && sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd \
   && mkdir -p /var/run/sshd \
