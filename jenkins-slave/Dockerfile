@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Adapted from: https://registry.hub.docker.com/u/jpetazzo/dind/dockerfile/
 # Let's start with some basic stuff.
-RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core git-flow python-pip unzip
+RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core git-flow python-pip npm unzip
 
 RUN curl -L https://opscode-omnibus-packages.s3.amazonaws.com/debian/6/x86_64/chefdk_0.10.0-1_amd64.deb > /tmp/chefdk_0.10.0-1_amd64.deb  && \
   dpkg -i /tmp/chefdk_0.10.0-1_amd64.deb && \
@@ -15,6 +15,8 @@ RUN curl -L https://opscode-omnibus-packages.s3.amazonaws.com/debian/6/x86_64/ch
   curl -L https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_amd64.zip > /tmp/packer.zip && \
   unzip -o /tmp/packer.zip -d /opt/packer && \
   pip install awscli && \
+  ln -s /usr/bin/nodejs /usr/bin/node && \
+  npm install -g azure-cli && \
   echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins && \
   curl -sSL https://get.docker.com/ | sh
 
