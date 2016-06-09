@@ -84,3 +84,4 @@ workflow-api
 workflow-step-api
 workflow-aggregator
 credentials-binding
+envinject
