@@ -12,7 +12,7 @@ RUN curl -L https://opscode-omnibus-packages.s3.amazonaws.com/debian/6/x86_64/ch
   dpkg -i /tmp/chefdk_0.10.0-1_amd64.deb && \
   export LC_CTYPE=en_US.UTF-8 && \
   locale-gen en_US.UTF-8 && \
-  curl -L https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_amd64.zip > /tmp/packer.zip && \
+  curl -L https://releases.hashicorp.com/packer/0.10.1/packer_0.10.1_linux_amd64.zip > /tmp/packer.zip && \
   unzip -o /tmp/packer.zip -d /opt/packer && \
   pip install awscli && \
   ln -s /usr/bin/nodejs /usr/bin/node && \
