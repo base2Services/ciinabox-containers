@@ -1,4 +1,4 @@
 FROM jenkins:2.7.2
-COPY plugins.txt /usr/share/jenkins/ref/
-COPY custom.groovy /usr/share/jenkins/ref/init.groovy.d/custom.groovy
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
+COPY custom.groovy /usr/share/jenkins/ref/init.groovy.d/custom.groovy

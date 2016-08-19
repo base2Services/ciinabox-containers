@@ -5,18 +5,20 @@ import com.cloudbees.plugins.credentials.common.*
 import com.cloudbees.plugins.credentials.domains.*
 import com.cloudbees.plugins.credentials.impl.*
 import hudson.plugins.sshslaves.*;
-import hudson.model.*
 import jenkins.model.*
+import hudson.model.*
 import hudson.security.*
 import hudson.slaves.*
-import hudson.plugins.sshslaves.*
 
 def instance = Jenkins.getInstance()
 instance.setNumExecutors(0)
 
+def bootstrap = new File(instance.root,"bootstrap").exists()
+
 user = hudson.model.User.get('ciinabox',false)
 
 if(user == null) {
+  println("no ciinabox user found...creating it")
   user = hudson.model.User.get('ciinabox')
   user.setFullName('ciinabox')
   email = new hudson.tasks.Mailer.UserProperty('ciinabox@base2services.com')
@@ -46,7 +48,7 @@ def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredenti
 def jenkinsCreds = null
 for (c in creds) {
   if(c.username == 'jenkins') {
-    addJenkinsCred = c
+    jenkinsCreds = c
     break
   }
 }
@@ -76,3 +78,5 @@ envProps = new EnvironmentVariablesNodeProperty(envVars)
 
 Jenkins.instance.addNode(new DumbSlave("jenkins-docker-slave","Jenkins Docker Slave","/home/jenkins","8",Node.Mode.NORMAL,"docker",
   new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),[envProps]))
+
+println("echo 'true' > $JENKINS_HOME/bootstrap".execute().text)
