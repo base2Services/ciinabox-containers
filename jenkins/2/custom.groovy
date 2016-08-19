@@ -13,11 +13,11 @@ import hudson.slaves.*
 def instance = Jenkins.getInstance()
 instance.setNumExecutors(0)
 
-def bootstrap = new File(instance.root,"bootstrap").exists()
+def bootstrap = new File("/var/jenkins_home/bootstrap").exists()
 
 user = hudson.model.User.get('ciinabox',false)
 
-if(user == null) {
+if(user == null && !bootstrap) {
   println("no ciinabox user found...creating it")
   user = hudson.model.User.get('ciinabox')
   user.setFullName('ciinabox')
@@ -79,4 +79,8 @@ envProps = new EnvironmentVariablesNodeProperty(envVars)
 Jenkins.instance.addNode(new DumbSlave("jenkins-docker-slave","Jenkins Docker Slave","/home/jenkins","8",Node.Mode.NORMAL,"docker",
   new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),[envProps]))
 
-println("echo 'true' > $JENKINS_HOME/bootstrap".execute().text)
+if(!bootstrap) {
+  println("touch /var/jenkins_home/bootstrap".execute().text)
+} else {
+  println("already bootstrap!!!!!")
+}
