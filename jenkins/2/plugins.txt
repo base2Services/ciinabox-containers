@@ -61,7 +61,7 @@ ace-editor
 workflow-cps
 groovy-postbuild
 gradle
-slack
+slack:1.8.1
 windows-slaves
 aws-lambda
 codedeploy
@@ -74,7 +74,6 @@ docker-plugin
 git-server
 structs
 workflow-support
-workflow-cps
 pipeline-stage-step
 pipeline-stage-view
 workflow-cps-global-lib

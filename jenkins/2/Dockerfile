@@ -1,4 +1,4 @@
-FROM jenkins:2.7.2
+FROM jenkins:2.7.3
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
 COPY custom.groovy /usr/share/jenkins/ref/init.groovy.d/custom.groovy
+RUN /usr/local/bin/install-plugins.sh $(cat /usr/share/jenkins/ref/plugins.txt)
