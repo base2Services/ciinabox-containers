@@ -8,6 +8,11 @@ ENV DEBIAN_FRONTEND noninteractive
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy apt-transport-https ca-certificates git lxc iptables curl bison build-essential zlib1g-dev libssl-dev libxml2-dev git-core git-flow python-pip npm unzip
 
+# Install git-lfs
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
+    apt-get install -y --no-install-recommends git-lfs && \
+    git lfs install
+
 RUN curl -L https://opscode-omnibus-packages.s3.amazonaws.com/debian/6/x86_64/chefdk_0.10.0-1_amd64.deb > /tmp/chefdk_0.10.0-1_amd64.deb  && \
   dpkg -i /tmp/chefdk_0.10.0-1_amd64.deb && \
   export LC_CTYPE=en_US.UTF-8 && \
