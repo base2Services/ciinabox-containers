@@ -87,6 +87,8 @@ workflow-step-api
 pipeline-build-step
 workflow-api
 workflow-aggregator
+workflow-remote-loader
+docker-workflow
 credentials-binding
 envinject
 maven-plugin
