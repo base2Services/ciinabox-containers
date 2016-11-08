@@ -35,6 +35,11 @@ RUN apt-get update -qq && apt-get install -qqy \
   && curl -L "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip" > /tmp/packer.zip \
   && unzip -o /tmp/packer.zip -d /opt/packer \
   && pip install awscli
+  
+# Install git-lfs
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
+    apt-get install -y --no-install-recommends git-lfs && \
+    git lfs install
 
 EXPOSE 22
 
