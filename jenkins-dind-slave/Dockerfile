@@ -10,6 +10,7 @@ ENV PACKER_VERSION "0.9.0"
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
   apt-transport-https \
+  gettext-base \
   ca-certificates \
   lxc \
   iptables \
