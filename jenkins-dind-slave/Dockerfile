@@ -4,8 +4,8 @@ MAINTAINER Aaron Walker <a.walker@base2services.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DOCKER_VERSION "1.9.1"
-ENV CHEFDK_VERSION "0.12.0-1"
-ENV PACKER_VERSION "0.9.0"
+ENV CHEFDK_VERSION "1.2.22-1"
+ENV PACKER_VERSION "0.12.2"
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
@@ -36,7 +36,7 @@ RUN apt-get update -qq && apt-get install -qqy \
   && curl -L "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip" > /tmp/packer.zip \
   && unzip -o /tmp/packer.zip -d /opt/packer \
   && pip install awscli
-  
+
 # Install git-lfs
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
     apt-get install -y --no-install-recommends git-lfs && \
