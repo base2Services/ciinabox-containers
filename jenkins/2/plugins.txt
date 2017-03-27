@@ -103,3 +103,4 @@ handlebars
 javadoc
 run-condition
 next-build-number
+blueocean
