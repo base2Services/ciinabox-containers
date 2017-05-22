@@ -15,6 +15,7 @@ instance.setNumExecutors(0)
 
 def bootstrap = new File("/var/jenkins_home/bootstrap").exists()
 
+
 user = hudson.model.User.get('ciinabox',false)
 
 if(user == null && !bootstrap) {
@@ -76,9 +77,20 @@ def envVars = [
 ]
 envProps = new EnvironmentVariablesNodeProperty(envVars)
 
-Jenkins.instance.addNode(new DumbSlave("jenkins-docker-slave","Jenkins Docker Slave","/home/jenkins","8",Node.Mode.NORMAL,"docker",
-  new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),[envProps]))
-
+def defaultSlaveExists(){
+  for (jenkinsSlave in hudson.model.Hudson.instance.slaves) {
+    if ( jenkinsSlave.name.equals('jenkins-docker-slave') ) {
+      return true
+    }
+  }
+  false
+}
+  
+def addSlave = !(defaultSlaveExists())
+  if(addSlave) {  
+  Jenkins.instance.addNode(new DumbSlave("jenkins-docker-slave","Jenkins Docker Slave","/home/jenkins","8",Node.Mode.NORMAL,"docker",
+    new SSHLauncher("172.17.0.1",2223,jenkinsCreds,null,null,null,null,null,null,null,null),new RetentionStrategy.Always(),[envProps]))
+}
 if(!bootstrap) {
   println("touch /var/jenkins_home/bootstrap".execute().text)
 } else {
