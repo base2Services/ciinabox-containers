@@ -19,6 +19,7 @@ RUN apt-get update -qq && apt-get install -qqy \
   git-flow \
   python-pip \
   unzip \
+  jq \
   openssh-server \
   sudo \
   groff \
