@@ -62,7 +62,7 @@ ace-editor
 workflow-cps
 groovy-postbuild
 gradle
-slack:1.8.1
+slack
 windows-slaves
 aws-lambda
 codedeploy
