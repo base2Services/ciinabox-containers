@@ -104,3 +104,4 @@ handlebars
 javadoc
 run-condition
 next-build-number
+multiple-scms
