@@ -1,6 +1,7 @@
 ##### Intermediate source code layer
-MAINTAINER "base2Services" <itsupport@base2services.com>
 FROM alpine:latest as source
+
+MAINTAINER "base2Services" <itsupport@base2services.com>
 
 ARG SOURCE_SHA1="16f099b"
 ENV SHA1 $SOURCE_SHA1
