@@ -55,7 +55,6 @@ git-parameter
 ansicolor
 embeddable-build-status
 buildgraph-view
-build-flow-plugin
 description-setter
 jquery-detached
 ace-editor
