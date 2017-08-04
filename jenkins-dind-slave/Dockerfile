@@ -1,9 +1,10 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
+FROM base2/amazon-ecr-credential-helper:latest as amazon-ecr-credential-helper
 FROM java:openjdk-8-jdk
-MAINTAINER Aaron Walker <a.walker@base2services.com>
+MAINTAINER "base2Services" <itsupport@base2services.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV DOCKER_VERSION "1.9.1"
+ENV DOCKER_VERSION "17.06.0-ce"
 ENV CHEFDK_VERSION "1.2.22-1"
 ENV PACKER_VERSION "0.12.2"
 
@@ -31,7 +32,8 @@ RUN apt-get update -qq && apt-get install -qqy \
   && adduser --quiet jenkins && echo "jenkins:jenkins" | chpasswd \
   && echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins \
   && usermod -a -G root jenkins \
-  && curl -sSL "https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}" > /usr/bin/docker && chmod +x /usr/bin/docker \
+  && curl "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" > /tmp/docker.tgz \
+  && tar -xf /tmp/docker.tgz -C /tmp && mv /tmp/docker/* /bin && rm -rf /tmp/docker* \
   && curl -kL "https://packages.chef.io/stable/debian/6/chefdk_${CHEFDK_VERSION}_amd64.deb" > /tmp/chefdk.deb \
   && dpkg -i /tmp/chefdk.deb \
   && curl -L "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip" > /tmp/packer.zip \
@@ -42,6 +44,11 @@ RUN apt-get update -qq && apt-get install -qqy \
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
     apt-get install -y --no-install-recommends git-lfs && \
     git lfs install
+
+# Install and configure amazon-ecr-credentials helper
+COPY --from=amazon-ecr-credential-helper /bin/docker-credential-ecr-login /bin/docker-credential-ecr-login
+COPY docker.config.json /root/.docker/config.json
+COPY docker.config.json /home/jenkins/.docker/config.json
 
 EXPOSE 22
 

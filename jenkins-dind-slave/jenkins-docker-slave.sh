@@ -3,7 +3,7 @@ set -e
 
 /usr/sbin/sshd -D &
 
-docker daemon \
+/bin/dockerd \
 	--host=unix:///var/run/docker.sock \
 	--storage-driver=vfs \
 	"$@"
