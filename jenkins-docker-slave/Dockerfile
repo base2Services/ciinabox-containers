@@ -3,11 +3,15 @@ FROM base2/amazon-ecr-credential-helper:latest as amazon-ecr-credential-helper
 FROM java:openjdk-8-jdk
 MAINTAINER "base2Services" <itsupport@base2services.com>
 
+# Default to not using credentials helper and docker 17.03.2-ce
 ARG USE_ECR_CREDENTIAL_HELPER="0"
+ARG DOCKER_VERSION="17.03.2-ce"
 
 ENV USE_ECR_CREDENTIAL_HELPER $USE_ECR_CREDENTIAL_HELPER
+ENV DOCKER_VERSION $DOCKER_VERSION
+
 ENV DEBIAN_FRONTEND noninteractive
-ENV DOCKER_VERSION "17.03.2-ce"
+
 ENV CHEFDK_VERSION "1.2.22-1"
 ENV PACKER_VERSION "0.12.2"
 
