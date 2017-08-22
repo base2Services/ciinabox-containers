@@ -3,8 +3,11 @@ FROM base2/amazon-ecr-credential-helper:latest as amazon-ecr-credential-helper
 FROM java:openjdk-8-jdk
 MAINTAINER "base2Services" <itsupport@base2services.com>
 
+ARG USE_ECR_CREDENTIAL_HELPER="0"
+
+ENV USE_ECR_CREDENTIAL_HELPER $USE_ECR_CREDENTIAL_HELPER
 ENV DEBIAN_FRONTEND noninteractive
-ENV DOCKER_VERSION "17.06.0-ce"
+ENV DOCKER_VERSION "17.03.2-ce"
 ENV CHEFDK_VERSION "1.2.22-1"
 ENV PACKER_VERSION "0.12.2"
 
@@ -47,8 +50,8 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
 
 # Install and configure amazon-ecr-credentials helper
 COPY --from=amazon-ecr-credential-helper /bin/docker-credential-ecr-login /bin/docker-credential-ecr-login
-COPY docker.config.json /root/.docker/config.json
-COPY docker.config.json /home/jenkins/.docker/config.json
+COPY setup_ecr_credentials_helper.sh /bin/setup_ecr_credentials_helper
+RUN chmod a+x /bin/setup_ecr_credentials_helper
 
 EXPOSE 22
 
