@@ -1,5 +1,6 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
 FROM base2/amazon-ecr-credential-helper:latest as amazon-ecr-credential-helper
+
 FROM java:openjdk-8-jdk
 MAINTAINER "base2Services" <itsupport@base2services.com>
 
@@ -55,10 +56,15 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
 # Install and configure amazon-ecr-credentials helper
 COPY --from=amazon-ecr-credential-helper /bin/docker-credential-ecr-login /bin/docker-credential-ecr-login
 COPY setup_ecr_credentials_helper.sh /bin/setup_ecr_credentials_helper
-RUN chmod a+x /bin/setup_ecr_credentials_helper
+COPY jenkins-docker-slave.sh  /usr/local/bin/jenkins-docker-slave.sh
+RUN chmod a+x /bin/setup_ecr_credentials_helper; \
+    chmod a+x /usr/local/bin/jenkins-docker-slave.sh
 
 EXPOSE 22
 
-COPY jenkins-docker-slave.sh /usr/local/bin
-ENTRYPOINT ["/usr/local/bin/jenkins-docker-slave.sh"]
-CMD []
+ENV TINI_VERSION v0.15.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+CMD ["/usr/local/bin/jenkins-docker-slave.sh"]

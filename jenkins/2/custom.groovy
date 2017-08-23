@@ -137,3 +137,5 @@ if (!bootstrap) {
 } else {
   println("Bootstrap file present, this is not first execution of this file")
 }
+
+println "\nCIINABOX - Jenkins initialization complete at ${new java.util.Date()}\n"
