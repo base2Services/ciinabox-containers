@@ -81,7 +81,7 @@ pipeline-input-step
 workflow-basic-steps
 workflow-multibranch
 workflow-scm-step
-workflow-job:2.11
+workflow-job
 workflow-durable-task-step
 workflow-step-api
 pipeline-build-step
