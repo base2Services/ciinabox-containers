@@ -104,3 +104,4 @@ javadoc
 run-condition
 next-build-number
 multiple-scms
+cloudbees-bitbucket-branch-source
