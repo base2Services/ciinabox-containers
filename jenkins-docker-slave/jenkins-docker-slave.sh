@@ -35,5 +35,8 @@ else
       chown 1000:1000 /data/jenkins-dood
       usermod -d /data/jenkins-dood jenkins
     fi
+    # jenkins home folder has been changed so 'setup_ecr_crednetials_helper'
+    # needs to re-run
+    setup_ecr_credentials_helper
     /usr/sbin/sshd -D
 fi
