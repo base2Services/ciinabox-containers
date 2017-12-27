@@ -14,7 +14,7 @@ ENV DOCKER_VERSION $DOCKER_VERSION
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV CHEFDK_VERSION "1.2.22-1"
-ENV PACKER_VERSION "0.12.2"
+ENV PACKER_VERSION "1.1.3"
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
