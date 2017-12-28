@@ -13,8 +13,8 @@ ENV DOCKER_VERSION $DOCKER_VERSION
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV CHEFDK_VERSION "1.2.22-1"
-ENV PACKER_VERSION "0.12.2"
+ENV CHEFDK_VERSION "2.4.17"
+ENV PACKER_VERSION "1.1.3"
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
@@ -42,7 +42,7 @@ RUN apt-get update -qq && apt-get install -qqy \
   && usermod -a -G root jenkins \
   && curl "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz" > /tmp/docker.tgz \
   && tar -xf /tmp/docker.tgz -C /tmp && mv /tmp/docker/* /bin && rm -rf /tmp/docker* \
-  && curl -kL "https://packages.chef.io/stable/debian/6/chefdk_${CHEFDK_VERSION}_amd64.deb" > /tmp/chefdk.deb \
+  && curl -kL "https://packages.chef.io/files/stable/chefdk/${CHEFDK_VERSION}/debian/8/chefdk_${CHEFDK_VERSION}-1_amd64.deb" > /tmp/chefdk.deb \
   && dpkg -i /tmp/chefdk.deb \
   && curl -L "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip" > /tmp/packer.zip \
   && unzip -o /tmp/packer.zip -d /opt/packer \
