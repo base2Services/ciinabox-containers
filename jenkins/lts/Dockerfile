@@ -5,4 +5,4 @@ RUN /usr/local/bin/install-plugins.sh $(cat /usr/share/jenkins/ref/plugins.txt)
 
 COPY entrypoint.sh /bin/entrypoint.sh
 
-ENTRYPOINT ["/bin/tini","--","/bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/entrypoint.sh"]
