@@ -12,7 +12,7 @@ if [ "$RUN_DOCKER_IN_DOCKER" == "1" ]; then
 
     /bin/dockerd \
         --host=unix:///var/run/docker.sock \
-        --storage-driver=vfs \
+        --storage-driver=$DOCKER_STORAGE_DRIVER \
         "$@"
 else
     if [ -S "/var/run/docker.sock" ]; then

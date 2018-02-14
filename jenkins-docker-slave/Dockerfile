@@ -7,7 +7,7 @@ MAINTAINER "base2Services" <itsupport@base2services.com>
 # Default to not using credentials helper and docker 17.03.2-ce
 ARG USE_ECR_CREDENTIAL_HELPER="0"
 ARG DOCKER_VERSION="17.03.2-ce"
-
+ARG DOCKER_STORAGE_DRIVER="vfs"
 ENV USE_ECR_CREDENTIAL_HELPER $USE_ECR_CREDENTIAL_HELPER
 ENV DOCKER_VERSION $DOCKER_VERSION
 
@@ -15,6 +15,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV CHEFDK_VERSION "2.4.17"
 ENV PACKER_VERSION "1.1.3"
+ENV DOCKER_STORAGE_DRIVER $DOCKER_IN_DOCKER_STORAGE_DRIVER
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
