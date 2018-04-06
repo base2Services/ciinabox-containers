@@ -109,3 +109,4 @@ docker-slaves
 bitbucket-build-status-notifier
 pipeline-githubnotify-step
 pipeline-github
+rebuild
