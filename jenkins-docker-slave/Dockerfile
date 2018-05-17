@@ -7,7 +7,7 @@ MAINTAINER "base2Services" <itsupport@base2services.com>
 # Default to not using credentials helper and docker 17.03.2-ce
 ARG USE_ECR_CREDENTIAL_HELPER="0"
 ARG DOCKER_VERSION="18.03.1-ce"
-ARG DOCKER_STORAGE_DRIVER="vfs"
+ARG DOCKER_STORAGE_DRIVER="overlay2"
 ENV USE_ECR_CREDENTIAL_HELPER $USE_ECR_CREDENTIAL_HELPER
 ENV DOCKER_VERSION $DOCKER_VERSION
 
@@ -62,6 +62,8 @@ RUN chmod a+x /bin/setup_ecr_credentials_helper; \
     chmod a+x /usr/local/bin/jenkins-docker-slave.sh
 
 EXPOSE 22
+
+VOLUME ['/var/lib/docker']
 
 ENV TINI_VERSION v0.15.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
