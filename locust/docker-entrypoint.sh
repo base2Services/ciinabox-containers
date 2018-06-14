@@ -1,21 +1,20 @@
 #!/bin/sh
+set -ex
 
-set -e
-
-aws s3 cp s3://${SOURCE_BUCKET}/containers/locust/locustfile.py . --region ${REGION} 
-
-chmod +x locustfile.py
+aws s3 cp s3://${LOCUST_S3_PATH} /locust/ --recursive --region ${AWS_REGION}
 
 LOCUST_MODE=${LOCUST_MODE:-standalone}
 LOCUST_MASTER_BIND_PORT=${LOCUST_MASTER_BIND_PORT:-5557}
 LOCUST_FILE=${LOCUST_FILE:-locustfile.py}
 
-if [ -z ${ATTACKED_HOST+x} ] ; then
-    echo "You need to set the URL of the host to be tested (ATTACKED_HOST)."
-    exit 1
-fi
+LOCUST_OPTS="-f ${LOCUST_FILE} --no-reset-stats"
 
-LOCUST_OPTS="-f ${LOCUST_FILE} --host=${ATTACKED_HOST} --no-reset-stats $LOCUST_OPTS"
+if [ -z ${HOST_URL+x} ] ; then
+    echo "No value set for (HOST_URL), falling back to host value in the locust class"
+else
+    echo "(HOST_URL) set to ${HOST_URL}"
+    LOCUST_OPTS="--host=${HOST_URL} $LOCUST_OPTS"
+fi
 
 case `echo ${LOCUST_MODE} | tr 'a-z' 'A-Z'` in
 "MASTER")
@@ -31,5 +30,4 @@ case `echo ${LOCUST_MODE} | tr 'a-z' 'A-Z'` in
     ;;
 esac
 
-cd /locust
-locust ${LOCUST_OPTS}
+exec "$@" ${LOCUST_OPTS}
