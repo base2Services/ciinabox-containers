@@ -8,11 +8,9 @@ RUN apk add --no-cache \
     shadow \
     bash \
     openjdk8 \
-    sudo \
-    && adduser -S jenkins && echo "jenkins:jenkins" | chpasswd \
-    && echo "jenkins ALL = NOPASSWD: ALL" > /etc/sudoers.d/jenkins \
-    && usermod -a -G root jenkins
-
+    git \
+    openssh-client \
+    && adduser -u 1000 -D kitchen
 
 RUN gem install --no-document \
   inspec \
@@ -20,4 +18,8 @@ RUN gem install --no-document \
   test-kitchen \
   kitchen-ec2 \
   berkshelf \
-  rspec-retry \
+  rspec-retry
+
+USER kitchen
+
+CMD ['kitchen']
