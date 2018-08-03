@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 
 if [[ -z "${SRCTAR}" ]]; then
     echo "No source tar provided. Deployment is probably incomplete"
