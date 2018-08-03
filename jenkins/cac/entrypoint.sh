@@ -4,10 +4,10 @@ if [[ -z "${SRCTAR}" ]]; then
     echo "No source tar provided. Deployment is probably incomplete"
 elif [[ "${SRCTAR}" =~ ^s3:.* ]]; then
     echo "Downloading ${SRCTAR} from s3"
-    /usr/bin/s3get.py "${SRCTAR}" | tar -vxf -C /
+    /usr/bin/s3get.py "${SRCTAR}" | tar -vx -C /
 elif [[ "${SRCTAR}" =~ ^https?:.* ]]; then
     echo "Downloading ${SRCTAR} from web"
-    curl "${SRCTAR}" | tar -vxf -C /
+    curl "${SRCTAR}" | tar -vx -C /
 else
     echo "I don't know how to handle: ${SRCTAR}"
 fi
