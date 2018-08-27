@@ -9,7 +9,6 @@ import hmac
 import base64
 
 defaultProfileResponse = urllib2.urlopen('http://169.254.169.254/latest/meta-data/iam/security-credentials/')
-data = json.load(response)
 defaultProfile = defaultProfileResponse.read()
 
 response = urllib2.urlopen('http://169.254.169.254/latest/meta-data/iam/security-credentials/' + defaultProfile)
