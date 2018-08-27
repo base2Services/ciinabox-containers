@@ -7,8 +7,14 @@ import datetime
 from hashlib import sha1
 import hmac
 import base64
-response = urllib2.urlopen('http://169.254.169.254/latest/meta-data/iam/security-credentials/' + os.environ['IAM_ROLE'])
+
+defaultProfileResponse = urllib2.urlopen('http://169.254.169.254/latest/meta-data/iam/security-credentials/')
 data = json.load(response)
+defaultProfile = defaultProfileResponse.read()
+
+response = urllib2.urlopen('http://169.254.169.254/latest/meta-data/iam/security-credentials/' + defaultProfile)
+data = json.load(response)
+
 urlin = urlparse(sys.argv[1])
 bucket = urlin.netloc
 file = urlin.path

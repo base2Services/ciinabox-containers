@@ -17,10 +17,6 @@ s3://<bucket>/<path>
 
 It will remove all parameters.
 
-You will also need to specify a EC2 Instance Role in the variable:
-
-    IAM_ROLE
-    
 It will then grab the the security credentials from: 
 
     http://169.254.169.254/latest/meta-data/iam/security-credentials/ 
