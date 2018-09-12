@@ -10,7 +10,7 @@ elif [[ "${SRCTAR}" =~ ^https?:.* ]]; then
     curl "${SRCTAR}" | tar -vx -C /
 elif [[ "${SRCTAR}" =~ ^file:.* ]]; then
     echo "Extracting ${SRCTAR} from file system"
-    tar -vxf `echo "${SRCTAR}" | sed 's:^file\://\?::'` -C /
+    tar -vxmf `echo "${SRCTAR}" | sed 's:^file\://\?::'` -C /
 else
     echo "I don't know how to handle: ${SRCTAR}"
 fi
