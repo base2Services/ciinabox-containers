@@ -1,0 +1,3 @@
+jdk-tool:1.1
+command-launcher:1.2
+script-security:1.36
