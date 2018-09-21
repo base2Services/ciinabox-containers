@@ -7,6 +7,7 @@ RUN /usr/local/bin/install-plugins.sh jdk-tool && \
     /usr/local/bin/install-plugins.sh command-launcher && \
     /usr/local/bin/install-plugins.sh script-security && \
     /usr/local/bin/install-plugins.sh configuration-as-code && \
-    /usr/local/bin/install-plugins.sh configuration-as-code-support
+    /usr/local/bin/install-plugins.sh configuration-as-code-support && \
+    mkdir /inits/ && chown jenkins:jenkins /inits/
 
 ENTRYPOINT ["/sbin/tini","--","/bin/entrypoint.sh"]
