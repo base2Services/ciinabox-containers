@@ -1,4 +1,4 @@
-FROM jenkins:lts
+FROM jenkins/jenkins:lts
 
 COPY entrypoint.sh /bin/entrypoint.sh
 COPY s3get.py /usr/bin/s3get.py
