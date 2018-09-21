@@ -7,5 +7,6 @@ RUN /usr/local/bin/install-plugins.sh jdk-tool command-launcher script-security 
 USER root
 RUN mkdir /inits/ && chown jenkins:jenkins /inits/
 USER $USER
+ENV JAVA_OPTS "-Djenkins.install.runSetupWizard=false ${JAVA_OPTS:-}"
 
 ENTRYPOINT ["/sbin/tini","--","/bin/entrypoint.sh"]
