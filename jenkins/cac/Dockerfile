@@ -9,4 +9,4 @@ RUN /usr/local/bin/install-plugins.sh jdk-tool && \
     /usr/local/bin/install-plugins.sh configuration-as-code && \
     /usr/local/bin/install-plugins.sh configuration-as-code-support
 
-ENTRYPOINT ["/bin/tini","--","/bin/entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini","--","/bin/entrypoint.sh"]
