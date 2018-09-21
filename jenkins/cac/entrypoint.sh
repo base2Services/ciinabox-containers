@@ -15,6 +15,13 @@ else
     echo "I don't know how to handle: ${SRCTAR}"
 fi
 
+if test -d /inits/; then
+    for e in /inits/*.sh; do
+        chmod +x "$e"
+        "$e"
+    done
+fi
+
 # If init file exists, needs to be overwritten
 # as jenkins exntrypoint does not handle this situation
 # (does not care if init script is updated on)
@@ -23,4 +30,4 @@ if [ -f "/var/jenkins_home/init.groovy.d/custom.groovy" ];then
   cp /usr/share/jenkins/ref/init.groovy.d/custom.groovy /var/jenkins_home/init.groovy.d/custom.groovy
 fi
 
-/usr/local/bin/jenkins.sh
+exec /usr/local/bin/jenkins.sh
