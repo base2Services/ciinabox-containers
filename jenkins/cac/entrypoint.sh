@@ -21,4 +21,6 @@ if test -d /inits/; then
     done
 fi
 
+export JAVA_OPTS="-Djenkins.install.runSetupWizard=false ${JAVA_OPTS:-}"
+
 exec /usr/local/bin/jenkins.sh
