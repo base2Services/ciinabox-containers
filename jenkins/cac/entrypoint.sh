@@ -17,8 +17,7 @@ fi
 
 if test -d /inits/; then
     for e in /inits/*.sh; do
-        chmod +x "$e"
-        "$e"
+        chmod +x "$e" && "$e" || /bin/true
     done
 fi
 
