@@ -31,12 +31,10 @@ github
 ghprb
 jira
 confluence-publisher
-jenkins-cloudformation-plugin
 packer
 jackson2-api
 aws-java-sdk
 aws-credentials
-s3
 gravatar
 hipchat
 checkstyle
@@ -50,7 +48,6 @@ prereq-buildstep
 promoted-builds
 ssh
 node-iterator-api
-ec2
 git-parameter
 ansicolor
 embeddable-build-status
@@ -63,7 +60,6 @@ groovy-postbuild
 gradle
 slack
 windows-slaves
-aws-lambda
 codedeploy
 mailer
 github-oauth
