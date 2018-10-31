@@ -8,4 +8,6 @@ if [ -f "/var/jenkins_home/init.groovy.d/custom.groovy" ];then
   cp /usr/share/jenkins/ref/init.groovy.d/custom.groovy /var/jenkins_home/init.groovy.d/custom.groovy
 fi
 
+setup_ecr_credentials_helper
+
 /usr/local/bin/jenkins.sh
