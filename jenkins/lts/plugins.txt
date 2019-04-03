@@ -106,3 +106,4 @@ bitbucket-build-status-notifier
 pipeline-githubnotify-step
 pipeline-github
 rebuild
+basic-branch-build-strategies
