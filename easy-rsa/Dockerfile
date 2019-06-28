@@ -12,6 +12,8 @@ ENV EASYRSA_BATCH=yes
 
 WORKDIR /easy-rsa
 
-COPY run.sh /
+COPY create-ca.sh /usr/local/bin/create-ca
+COPY create-client.sh /usr/local/bin/create-client
+COPY revoke-client.sh /usr/local/bin/revoke-client
 
-ENTRYPOINT /run.sh
+CMD create-ca
