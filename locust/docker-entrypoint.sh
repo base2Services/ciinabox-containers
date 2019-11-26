@@ -6,6 +6,7 @@ aws s3 cp s3://${LOCUST_S3_PATH} /locust/ --recursive --region ${AWS_REGION}
 LOCUST_MODE=${LOCUST_MODE:-standalone}
 LOCUST_MASTER_BIND_PORT=${LOCUST_MASTER_BIND_PORT:-5557}
 LOCUST_FILE=${LOCUST_FILE:-locustfile.py}
+LOCUST_LOG_LEVEL=${LOCUST_LOG_LEVEL:-INFO}
 
 LOCUST_OPTS="-f ${LOCUST_FILE} --no-reset-stats"
 
