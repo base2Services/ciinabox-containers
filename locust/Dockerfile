@@ -1,17 +1,20 @@
 FROM python:3.6-alpine
 
-ARG LOCUST_VERSION="0.10.0"
+ARG LOCUST_VERSION="0.13.2"
 ENV LOCUST_VERSION $LOCUST_VERSION
 
 RUN apk --no-cache add \
       --virtual=.build-dep \
       build-base \
-      libzmq \
       linux-headers \
       zeromq-dev \
+      libffi-dev \
+    && apk --no-cache add \
+      libzmq \
     && pip install --no-cache-dir \
       locustio==${LOCUST_VERSION} \
       awscli \
+      pyzmq \
     && apk del .build-dep \
     && mkdir /locust
 
