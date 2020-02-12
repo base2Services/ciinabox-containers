@@ -1,20 +1,20 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
 FROM base2/amazon-ecr-credential-helper:latest as amazon-ecr-credential-helper
 
-FROM java:openjdk-8-jdk
+FROM openjdk:8-jdk
 MAINTAINER "base2Services" <itsupport@base2services.com>
 
 # Default to not using credentials helper and docker 17.03.2-ce
 ARG USE_ECR_CREDENTIAL_HELPER="0"
-ARG DOCKER_VERSION="18.09.3"
+ARG DOCKER_VERSION="19.03.5"
 ARG DOCKER_STORAGE_DRIVER="overlay2"
 ENV USE_ECR_CREDENTIAL_HELPER $USE_ECR_CREDENTIAL_HELPER
 ENV DOCKER_VERSION $DOCKER_VERSION
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV CHEFDK_VERSION "3.8.14"
-ENV PACKER_VERSION "1.3.5"
+ENV CHEFDK_VERSION "4.7.73"
+ENV PACKER_VERSION "1.5.1"
 ENV DOCKER_STORAGE_DRIVER $DOCKER_IN_DOCKER_STORAGE_DRIVER
 
 # Let's start with some basic stuff.
