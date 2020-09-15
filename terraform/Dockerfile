@@ -3,7 +3,7 @@ FROM hashicorp/terraform:${VERSION} as pkg
 
 FROM alpine
 
-RUN apk add ca-certificates wget tar gzip --no-cache && \
+RUN apk add ca-certificates wget tar gzip git --no-cache && \
     adduser -h /home/jenkins -D -u 1000 jenkins
 
 USER jenkins
