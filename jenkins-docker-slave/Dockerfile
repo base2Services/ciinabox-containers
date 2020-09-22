@@ -2,11 +2,10 @@
 FROM base2/amazon-ecr-credential-helper:latest as amazon-ecr-credential-helper
 
 FROM openjdk:8-jdk
-MAINTAINER "base2Services" <itsupport@base2services.com>
 
 # Default to not using credentials helper and docker 17.03.2-ce
 ARG USE_ECR_CREDENTIAL_HELPER="0"
-ARG DOCKER_VERSION="19.03.5"
+ARG DOCKER_VERSION="19.03.9"
 ARG DOCKER_STORAGE_DRIVER="overlay2"
 ENV USE_ECR_CREDENTIAL_HELPER $USE_ECR_CREDENTIAL_HELPER
 ENV DOCKER_VERSION $DOCKER_VERSION
