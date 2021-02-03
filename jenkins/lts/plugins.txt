@@ -37,7 +37,6 @@ aws-java-sdk
 aws-credentials
 gravatar
 hipchat
-checkstyle
 disk-usage
 rubyMetrics
 build-pipeline-plugin
