@@ -15,7 +15,6 @@ git-client
 scm-api
 git
 github-api
-ruby-runtime
 token-macro
 jquery
 jquery-ui
@@ -23,7 +22,6 @@ rake
 plain-credentials
 ssh-agent
 warnings-ng
-rvm
 mercurial
 bitbucket
 bitbucket-pullrequest-builder
