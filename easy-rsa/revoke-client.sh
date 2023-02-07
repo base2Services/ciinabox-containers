@@ -1,12 +1,12 @@
-#/bin/sh
+#/bin/bash
 set -e
 
-if [[ -z $EASYRSA_CLIENT_CN ]]; then
+if [ -z $EASYRSA_CLIENT_CN ]; then
   echo "EASYRSA_CLIENT_CN is not set"
   exit 1
 fi
 
-if [[ -z $EASYRSA_OUTPUT_DIR ]]; then
+if [ -z $EASYRSA_OUTPUT_DIR ]; then
   EASYRSA_OUTPUT_DIR="output"
 fi
 

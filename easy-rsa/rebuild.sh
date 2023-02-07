@@ -20,23 +20,24 @@ if [ -n $EASYRSA_OPTS ]; then
     OPTS=$EASYRSA_OPTS
 fi
 
-easyrsa init-pki
-easyrsa build-ca nopass
+timestamp=$(date +%s)
+
+mv pki/reqs/server.req pki/reqs/server.req.bak-$timestamp
+mv pki/issued/server.crt pki/issued/server.crt.bak-$timestamp
+mv pki/private/server.key pki/private/server.key.bak-$timestamp
+
+mv pki/reqs/${EASYRSA_CLIENT_CN}.req pki/reqs/${EASYRSA_CLIENT_CN}.req.bak-$timestamp
+mv pki/issued/${EASYRSA_CLIENT_CN}.crt pki/issued/${EASYRSA_CLIENT_CN}.crt.bak-$timestamp
+mv pki/private/${EASYRSA_CLIENT_CN}.key pki/private/${EASYRSA_CLIENT_CN}.key.bak-$timestamp
+
 easyrsa ${OPTS} build-server-full server nopass
 easyrsa ${OPTS} build-client-full ${EASYRSA_CLIENT_CN} nopass
 
-echo "copying pki/ca.crt to $EASYRSA_OUTPUT_DIR/"
 cp pki/ca.crt $EASYRSA_OUTPUT_DIR/
-echo "copying pki/issued/server.crt to $EASYRSA_OUTPUT_DIR/"
 cp pki/issued/server.crt $EASYRSA_OUTPUT_DIR/
-echo "copying pki/private/server.key to $EASYRSA_OUTPUT_DIR/"
 cp pki/private/server.key $EASYRSA_OUTPUT_DIR/
-echo "copying pki/issued/${EASYRSA_CLIENT_CN}.crt to $EASYRSA_OUTPUT_DIR/"
 cp pki/issued/${EASYRSA_CLIENT_CN}.crt $EASYRSA_OUTPUT_DIR/
-echo "pki/private/${EASYRSA_CLIENT_CN}.key to $EASYRSA_OUTPUT_DIR/"
 cp pki/private/${EASYRSA_CLIENT_CN}.key $EASYRSA_OUTPUT_DIR/
 
 tar czfv ca.tar.gz pki/
-
-echo "ca.tar.gz to $EASYRSA_OUTPUT_DIR/"
 cp ca.tar.gz $EASYRSA_OUTPUT_DIR/

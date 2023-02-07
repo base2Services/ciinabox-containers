@@ -1,8 +1,9 @@
-FROM alpine
+FROM debian:bookworm-slim
 
-RUN apk add --no-cache easy-rsa \
-    # Hack until easy-rsa 3.0.7 is released https://github.com/OpenVPN/easy-rsa/issues/261
-    && sed -i 's/^RANDFILE\s*=\s\$ENV.*/#&/' /usr/share/easy-rsa/openssl-easyrsa.cnf \
+RUN apt-get update -qq \
+    && apt-get install -qqy \
+        easy-rsa \
+        git \
     && ln -s /usr/share/easy-rsa/easyrsa  /usr/bin/ \
     && mkdir /easy-rsa
 
@@ -15,5 +16,7 @@ WORKDIR /easy-rsa
 COPY create-ca.sh /usr/local/bin/create-ca
 COPY create-client.sh /usr/local/bin/create-client
 COPY revoke-client.sh /usr/local/bin/revoke-client
+COPY renew.sh /usr/local/bin/renew
+COPY rebuild.sh /usr/local/bin/rebuild
 
 CMD create-ca
