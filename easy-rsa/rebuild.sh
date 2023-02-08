@@ -20,6 +20,8 @@ if [ -n $EASYRSA_OPTS ]; then
     OPTS=$EASYRSA_OPTS
 fi
 
+tar xzfv output/ca.tar.gz
+
 timestamp=$(date +%s)
 
 mv pki/reqs/server.req pki/reqs/server.req.bak-$timestamp

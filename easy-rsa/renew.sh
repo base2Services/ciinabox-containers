@@ -20,6 +20,8 @@ if [ -n $EASYRSA_OPTS ]; then
     OPTS=$EASYRSA_OPTS
 fi
 
+tar xzfv output/ca.tar.gz
+
 easyrsa ${OPTS} renew server nopass
 easyrsa ${OPTS} renew ${EASYRSA_CLIENT_CN} nopass
 
